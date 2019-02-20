@@ -1,21 +1,17 @@
 #include "senior.h"
 
-float Senior::get_sav_interest()
-{
-    return savings_interest;
+float Senior::get_savings(){
+  return SAVINGS_INTEREST;
 }
 
-float Senior::get_check_interest()
-{
-    return check_interest;
+float Senior::get_check(){
+  return CHECK_INTEREST;
 }
 
-float Senior::get_check_charge()
-{
-    return check_charge;
+float Senior::get_charge(){
+  return CHECK_CHARGE;
 }
 
-float Senior::get_over_penalty()
-{
-    return overdraft_penalty;
+float Senior::get_penalty(){
+  return OVERDRAFT_PENALTY;
 }

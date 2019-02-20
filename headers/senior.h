@@ -1,21 +1,18 @@
 #ifndef _SENIOR_H_
 #define _SENIOR_H_
-
 #include "customer.h"
 
-class Senior: public Customer
-{
+class Senior : public Customer {
 private:
-    const float savings_interest = 0.15;
-    const float check_interest = 0.15;
-    const float check_charge = 0.15;
-    const float overdraft_penalty = 0.03;
+  const float SAVINGS_INTEREST = 0.07;
+  const float CHECK_INTEREST = 0.07;
+  const float CHECK_CHARGE = 0.07;
+  const float OVERDRAFT_PENALTY = 0.08;
 public:
-    Senior();
-    float get_sav_interest();
-    float get_check_interest();
-    float get_check_charge();
-    float get_over_penalty();
+  float get_savings();
+  float get_check();
+  float get_charge();
+  float get_penalty();
 };
 
 #endif

@@ -1,21 +1,17 @@
 #include "adult.h"
 
-float Adult::get_sav_interest()
-{
-    return savings_interest;
+float Adult::get_savings(){
+  return SAVINGS_INTEREST;
 }
 
-float Adult::get_check_interest()
-{
-    return check_interest;
+float Adult::get_check(){
+  return CHECK_INTEREST;
 }
 
-float Adult::get_check_charge()
-{
-    return check_charge;
+float Adult::get_charge(){
+  return CHECK_CHARGE;
 }
 
-float Adult::get_over_penalty()
-{
-    return overdraft_penalty;
+float Adult::get_penalty(){
+  return OVERDRAFT_PENALTY;
 }
