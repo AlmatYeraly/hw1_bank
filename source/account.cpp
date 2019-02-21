@@ -1,6 +1,7 @@
 #include "account.h"
 
 Account::Account(Customer* set_customer,int set_a_number) {
+  balance = 0;
   customer = set_customer;
   account_number = set_a_number;
 }

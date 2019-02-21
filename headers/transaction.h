@@ -6,6 +6,7 @@
 class Transaction {
 private:
   int customer_number;
+  // 1 for withdrawal, 0 for deposit transaction types//
   bool transaction_type;
   float amount;
   std::string fees;

@@ -1,31 +1,35 @@
 #include "bank.h"
-//WARNING!!! TESTING HAS NOT BEEN PERFORMED AND ERROR'S ARE LIKELY TO OCCUR!//
 
-int main() {
-/*  std::string command;
+
+void bank(){
+  std::string command;
   std::cout << "[Welcome to BANK!]\n";
   Bank bank;
+  std::locale loc;
   while (command != "exit"){
     std::cout<<"[]Input a command: ";
     std::getline(std::cin,command);
+    for (int i = 0; i < command.length(); i++){
+      command[i] = std::tolower(command[i],loc);
+    }
     if (command == "new account"){
-      std::cout<<"[]new account called! /s\n";
+      bank.add_account();
     }
     else if(command == "display account"){
-      std::cout<<"[]display account called! /s\n";
+      bank.get_account()->to_string();
     }
     else if(command == "make withdrawal"){
-      std::cout<<"[]withdrawal called! /s\n";
+      bank.make_withdrawal();
     }
     else if(command == "make deposit"){
-      std::cout<<"[]deposit called! /s\n";
+      bank.make_deposit();
     }
     else if(command != "exit"){
       std::cout<<"[]unrecognized command!\n";
     }
-  }*/
+  }
+}
 
-  Bank bank;
-  bank.add_account();
-  bank.add_account();
+int main() {
+  bank();
 }

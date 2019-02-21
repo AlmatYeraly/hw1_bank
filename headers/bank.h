@@ -10,7 +10,6 @@ class Bank{
 private:
   std::vector<Account*> accounts;
 public:
-
   void add_account();
   void make_deposit();
   void make_withdrawal();

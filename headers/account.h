@@ -10,7 +10,7 @@
 class Account {
 protected:
   Customer* customer;
-  float balance = 0;
+  float balance;
   int account_number;
   std::vector<Transaction*> transactions;
 
@@ -23,6 +23,9 @@ public:
   
   void set_customer(Customer updated_customer);
   void set_balance(float new_balance);
+
+  void virtual  deposit(float amount) = 0;
+  void virtual withdraw(float amount) = 0;
 };
 
 #endif

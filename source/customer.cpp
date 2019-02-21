@@ -42,5 +42,3 @@ long int Customer::get_telephone(){
 int Customer::get_customer_id(){
   return customer_number;
 }
-
-// Need to setup some constructors and some tests to ensure the code cannot be abused//
