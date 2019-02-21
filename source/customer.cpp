@@ -1,5 +1,13 @@
 #include "customer.h"
 
+Customer::Customer(std::string set_name, std::string set_address, int set_age, long int set_telephone, int set_id){
+  name = set_name;
+  address=set_address;
+  age = set_age;
+  telephone_number = set_telephone;
+  customer_number = set_id;
+}
+
 void Customer::set_name(std::string new_name){
   name = new_name;
 }
@@ -31,9 +39,8 @@ int Customer::get_age(){
 long int Customer::get_telephone(){
   return telephone_number;
 }
-
-bool Customer::operator==(const int a_num){
-  return (customer_number == a_num);
+int Customer::get_customer_id(){
+  return customer_number;
 }
 
 // Need to setup some constructors and some tests to ensure the code cannot be abused//

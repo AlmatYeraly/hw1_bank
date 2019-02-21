@@ -9,6 +9,7 @@ private:
   const float CHECK_CHARGE = 0.07;
   const float OVERDRAFT_PENALTY = 0.08;
 public:
+  Senior(std::string set_name, std::string set_address, int set_age, long int set_telephone, int set_id) : Customer(set_name, set_address, set_age, set_telephone, set_id) {}
   float get_savings();
   float get_check();
   float get_charge();

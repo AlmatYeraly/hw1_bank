@@ -15,16 +15,14 @@ protected:
   std::vector<Transaction*> transactions;
 
 public:
+  Account(Customer* set_customer, int set_a_number);
   float get_balance();
   Customer* get_customer();
-
+  int get_account_number();
   std::string to_string();
   
   void set_customer(Customer updated_customer);
   void set_balance(float new_balance);
-  
-  
-  bool operator==(const int a_num);
 };
 
 #endif

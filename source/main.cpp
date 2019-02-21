@@ -2,7 +2,7 @@
 //WARNING!!! TESTING HAS NOT BEEN PERFORMED AND ERROR'S ARE LIKELY TO OCCUR!//
 
 int main() {
-  std::string command;
+/*  std::string command;
   std::cout << "[Welcome to BANK!]\n";
   Bank bank;
   while (command != "exit"){
@@ -23,5 +23,9 @@ int main() {
     else if(command != "exit"){
       std::cout<<"[]unrecognized command!\n";
     }
-  }
+  }*/
+
+  Bank bank;
+  bank.add_account();
+  bank.add_account();
 }

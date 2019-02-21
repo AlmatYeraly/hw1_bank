@@ -1,7 +1,8 @@
 #include "account.h"
 
-bool Account::operator==(const int a_num){
-  return (account_number == a_num);
+Account::Account(Customer* set_customer,int set_a_number) {
+  customer = set_customer;
+  account_number = set_a_number;
 }
 
 float Account::get_balance(){
@@ -18,6 +19,10 @@ void Account::set_balance(float new_balance){
 
 Customer* Account::get_customer(){
   return customer;
+}
+
+int Account::get_account_number(){
+  return account_number;
 }
 
 std::string Account::to_string(){
