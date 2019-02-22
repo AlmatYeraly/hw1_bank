@@ -41,7 +41,7 @@ Account* Bank::get_account(){
       }
     }
     else if (found){
-      std::cout << "Account was found\n";
+      std::cout << "\n Account was found\n";
       return accounts[index];
     }
   }
@@ -55,8 +55,9 @@ Account* Bank::get_account(){
 void Bank::add_account(){
   std::string a_type;
   char response;
+  bool loop = true;
   std::cout<<"BEGINING ACCOUNT CREATION\n";
-  while(true){
+  while(loop){
     std::cout<<"What type of account? (Savings/Checking)\n";
     std::cin>>a_type;
     std::locale loc;
@@ -80,7 +81,7 @@ void Bank::add_account(){
       else continue;
     }
   }
-  while (true){
+  while (loop){
     std::cout<<"Will this account have an already existing customer? (y/n)\n";
     std::cin>>response;
     std::locale loc;
@@ -90,20 +91,34 @@ void Bank::add_account(){
       std::cout << "Input name: ";
       std::cin.ignore();
       std::getline (std::cin, input_name);
+      
       std::string input_address;
       std::cout << "Input address: ";
       std::getline (std::cin, input_address);
+
       int input_age = -1;
       while (input_age < 0 || input_age > 125){
         std::cout << "Input age: ";
         std::cin >> input_age;
       }
+      while(typeid(input_age) != typeid(int))
+      {
+        std::cout << "Invalid input. Please input integer \n"; 
+        std::cin >> input_age;
+      }
+
       long int input_phone = 0;
       while (input_phone > 999999999999999 || input_phone < 100){
         std::cout <<"Input telephone number: ";
         std::cin >> input_phone;
         std::cin.ignore();
       }
+      while(typeid(input_phone) != typeid(int))
+      {
+        std::cout << "Invalid input. Please input integer \n"; 
+        std::cin >> input_phone;
+      }
+
       // Make unique customer_id by generating random number within range and checking all other account's customer
       unique = false;
       int new_c_id;
@@ -117,40 +132,60 @@ void Bank::add_account(){
           else continue;
         }
       }
-      if (input_age < 18){
+      if (input_age >= 16 && input_age < 23){
         if (a_type == "savings"){
           accounts.push_back(new Savings(new  Student(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 1));
+          std::cout<<"\n Student Savings Account\n";
+          std::cout<<"Account id: " << 
+          accounts[accounts.size()-1]->get_account_number() <<std::endl;
+          std::cout<<"Customer id: " << 
+          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
         }
         else if (a_type == "checking"){
           accounts.push_back(new Checking(new Student(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 0));
+          std::cout<<"\n Student Checking Account\n";
+          std::cout<<"Account id: " << 
+          accounts[accounts.size()-1]->get_account_number() <<std::endl;
+          std::cout<<"Customer id: " << 
+          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
         }
         break;
       }
-      else if (input_age >= 18 && input_age < 65){
+      else if (input_age >= 23 && input_age < 65){
         if (a_type == "savings"){
           accounts.push_back(new Savings(new  Adult(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 1));
-          std::cout<<"Adult Savings Account\n";
-          std::cout<<"Customer id: " << 
-          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+          std::cout<<"\n Adult Savings Account\n";
           std::cout<<"Account id: " << 
           accounts[accounts.size()-1]->get_account_number() <<std::endl;
+          std::cout<<"Customer id: " << 
+          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
         }
         else if (a_type == "checking"){
           accounts.push_back(new Checking(new Adult(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 0));
-          std::cout<<"Adult Checking Account\n";
-          std::cout<<"Customer id: " << 
-          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+          std::cout<<"\n Adult Checking Account\n";
           std::cout<<"Account id: " << 
           accounts[accounts.size()-1]->get_account_number() <<std::endl;
+          std::cout<<"Customer id: " << 
+          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
         }
         break;
       }
       else if (input_age >= 65){
         if (a_type == "savings"){
           accounts.push_back(new Savings(new  Senior(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 1));
+          std::cout<<"\n Senior Savings Account\n";
+          std::cout<<"Account id: " << 
+          accounts[accounts.size()-1]->get_account_number() <<std::endl;
+          std::cout<<"Customer id: " << 
+          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
         }
         else if (a_type == "checking"){
           accounts.push_back(new Checking(new Senior(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 0));
+          std::cout<<"\n Senior Checking Account\n";
+          std::cout<<"Account id: " << 
+          accounts[accounts.size()-1]->get_account_number() <<std::endl;
+          std::cout<<"Customer id: " << 
+          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
         }
         break;
       }
@@ -166,11 +201,21 @@ void Bank::add_account(){
           if (a_type == "savings"){
             found = true;
             accounts.push_back(new  Savings(accounts[i]->get_customer(),new_a_id, 1));
+            std::cout<<"Account id: " << 
+            accounts[accounts.size()-1]->get_account_number() <<std::endl;
+            std::cout<<"Customer id: " << 
+            accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+            loop = false;
             break;
           }
           else if (a_type == "checking"){
             found = true;
             accounts.push_back(new Checking(accounts[i]->get_customer(),new_a_id, 0));
+            std::cout<<"Account id: " << 
+            accounts[accounts.size()-1]->get_account_number() <<std::endl;
+            std::cout<<"Customer id: " << 
+            accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+            loop = false;
             break;
           }
         }

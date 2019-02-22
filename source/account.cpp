@@ -34,16 +34,17 @@ bool Account::get_type(){
 
 std::string Account::to_string(){
   std::string info;
-  info = "Name: " + customer->get_name() + "\n";
+  int age = customer->get_age();
+  info = "\n Name: " + customer->get_name() + "\n";
 
-  if ( typeid(customer) == typeid(Senior*)){
-    info += "Customer group: Senior \n";
+  if (age >=16 && age < 23){
+    info += "Customer group: Student \n";
   }
-  else if ( typeid(customer) == typeid(Adult*)){
+  else if (age >= 23 && age < 65){
     info += "Customer group: Adult \n";
   }
-  else if ( typeid(customer) == typeid(Student*)){
-    info += "Customer group: Student \n";
+  else if (age >=65){
+    info += "Customer group: Senior \n";
   }
 
   info += 
