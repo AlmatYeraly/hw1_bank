@@ -11,7 +11,9 @@ void Savings::deposit(float amount){
 
 // TBI
 void Savings::withdraw(float amount){
+  balance -= amount;
   transactions.push_back(new Transaction);
+  std::string list_of_fees = "No unusual fees";
   transactions[transactions.size()-1]->process_tran(customer->get_customer_id(), 1, amount, "No fees");
 }
 

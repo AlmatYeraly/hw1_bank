@@ -119,16 +119,16 @@ void Bank::add_account(){
       }
       if (input_age < 18){
         if (a_type == "savings"){
-          accounts.push_back(new Savings(new  Student(input_name, input_address,input_age, input_phone, new_c_id),new_a_id));
+          accounts.push_back(new Savings(new  Student(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 1));
         }
         else if (a_type == "checking"){
-          accounts.push_back(new Checking(new Student(input_name, input_address,input_age, input_phone, new_c_id),new_a_id));
+          accounts.push_back(new Checking(new Student(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 0));
         }
         break;
       }
       else if (input_age >= 18 && input_age < 65){
         if (a_type == "savings"){
-          accounts.push_back(new Savings(new  Adult(input_name, input_address,input_age, input_phone, new_c_id),new_a_id));
+          accounts.push_back(new Savings(new  Adult(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 1));
           std::cout<<"Adult Savings Account\n";
           std::cout<<"Customer id: " << 
           accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
@@ -136,7 +136,7 @@ void Bank::add_account(){
           accounts[accounts.size()-1]->get_account_number() <<std::endl;
         }
         else if (a_type == "checking"){
-          accounts.push_back(new Checking(new Adult(input_name, input_address,input_age, input_phone, new_c_id),new_a_id));
+          accounts.push_back(new Checking(new Adult(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 0));
           std::cout<<"Adult Checking Account\n";
           std::cout<<"Customer id: " << 
           accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
@@ -147,10 +147,10 @@ void Bank::add_account(){
       }
       else if (input_age >= 65){
         if (a_type == "savings"){
-          accounts.push_back(new Savings(new  Senior(input_name, input_address,input_age, input_phone, new_c_id),new_a_id));
+          accounts.push_back(new Savings(new  Senior(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 1));
         }
         else if (a_type == "checking"){
-          accounts.push_back(new Checking(new Senior(input_name, input_address,input_age, input_phone, new_c_id),new_a_id));
+          accounts.push_back(new Checking(new Senior(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 0));
         }
         break;
       }
@@ -165,12 +165,12 @@ void Bank::add_account(){
           std::cout<<"Customer found\n";
           if (a_type == "savings"){
             found = true;
-            accounts.push_back(new  Savings(accounts[i]->get_customer(),new_a_id));
+            accounts.push_back(new  Savings(accounts[i]->get_customer(),new_a_id, 1));
             break;
           }
           else if (a_type == "checking"){
             found = true;
-            accounts.push_back(new Checking(accounts[i]->get_customer(),new_a_id));
+            accounts.push_back(new Checking(accounts[i]->get_customer(),new_a_id, 0));
             break;
           }
         }

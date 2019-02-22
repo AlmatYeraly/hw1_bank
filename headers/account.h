@@ -12,14 +12,16 @@ protected:
   Customer* customer;
   float balance;
   int account_number;
+  bool a_type;
   std::vector<Transaction*> transactions;
 
 public:
-  Account(Customer* set_customer, int set_a_number);
+  Account(Customer* set_customer, int set_a_number, bool type);
   float get_balance();
   Customer* get_customer();
   int get_account_number();
   std::string to_string();
+  bool get_type();
   
   void set_customer(Customer updated_customer);
   void set_balance(float new_balance);

@@ -12,6 +12,9 @@ private:
   std::string fees;
 public:
   void process_tran(int c_num, bool type, float amount, std::string list_of_fees);
+  std::string get_type();
+  int get_amount();
+  std::string get_fees();
 };
 
 #endif
