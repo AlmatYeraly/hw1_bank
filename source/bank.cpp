@@ -27,18 +27,7 @@ Account* Bank::get_account(){
     }
     if (!found){
       std::cout << "Account not found.\n";
-      while (response != 'y' || response != 'n'){
-        std::cout << "Do you wish to resubmit? (y/n)\n";
-        std::cin >> response;
-        std::locale loc;
-        response = std::tolower(response, loc);
-      }
-      if (response == 'y'){
-        continue;
-      }
-      else if (response =='n'){
-        return NULL;
-      }
+      return NULL;
     }
     else if (found){
       std::cout << "\n Account was found\n";
@@ -50,8 +39,8 @@ Account* Bank::get_account(){
 
 
 
-//
-//
+// Add a new account to the Bank's account array
+// If user is creating account with a previously existing customer, finds the customer by inputting customer's number
 void Bank::add_account(){
   std::string a_type;
   char response;
@@ -97,28 +86,17 @@ void Bank::add_account(){
       std::getline (std::cin, input_address);
 
       int input_age = -1;
-      while (input_age < 0 || input_age > 125){
+      while ((input_age < 0 || input_age > 125) || typeid(input_age) != typeid(int)){
         std::cout << "Input age: ";
-        std::cin >> input_age;
-      }
-      while(typeid(input_age) != typeid(int))
-      {
-        std::cout << "Invalid input. Please input integer \n"; 
         std::cin >> input_age;
       }
 
       long int input_phone = 0;
-      while (input_phone > 999999999999999 || input_phone < 100){
+      while ((input_phone > 999999999999999 || input_phone < 100) || typeid(input_phone) != typeid(long int)){
         std::cout <<"Input telephone number: ";
         std::cin >> input_phone;
         std::cin.ignore();
       }
-      while(typeid(input_phone) != typeid(int))
-      {
-        std::cout << "Invalid input. Please input integer \n"; 
-        std::cin >> input_phone;
-      }
-
       // Make unique customer_id by generating random number within range and checking all other account's customer
       unique = false;
       int new_c_id;
@@ -229,7 +207,8 @@ void Bank::add_account(){
 
 
 
-
+// User inputs which account and amount to deposit
+// account's deposit is called with amount as argument
 void Bank::make_deposit(){
   Account* account = get_account();
   if (account == NULL){
@@ -262,7 +241,8 @@ void Bank::make_deposit(){
 }
 
 
-
+// User inputs which account and amount to withdraw
+// account's withdraw is called with amount as argument
 void Bank::make_withdrawal(){
   Account* account = get_account();
   if (account == NULL){
