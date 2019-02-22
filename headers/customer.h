@@ -16,7 +16,7 @@ public:
   void set_name(std::string new_name);
   void set_address(std::string new_address);
   void set_age(int new_age);
-  void set_telephone(long const int new_phone);
+  void set_telephone(long int new_phone);
   //Get methods
   std::string get_name();
   std::string get_address();

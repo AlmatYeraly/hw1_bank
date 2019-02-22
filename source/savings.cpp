@@ -1,7 +1,7 @@
 #include "savings.h"
 #include <typeinfo>
 
-// TBI
+// Adds amount into the balance as well as interest for putting it into the account
 void Savings::deposit(float amount){
   balance += amount + (amount * add_interest());
   transactions.push_back(new Transaction);
@@ -9,7 +9,8 @@ void Savings::deposit(float amount){
   transactions[transactions.size()-1]->process_tran(customer->get_customer_id(), 0, amount, "No fees");
 }
 
-// TBI
+// Takes amount in argument out of the accounts' balance as well as a charge
+// If user withdraws more than what is in the bank (resulting in a negative balance), an additional overdraft penalty is taken
 void Savings::withdraw(float amount){
   balance -= amount * (1 + add_charge());
   transactions.push_back(new Transaction);

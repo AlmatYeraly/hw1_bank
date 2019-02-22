@@ -1,7 +1,7 @@
 #include "checking.h"
 #include <typeinfo>
 
-// TBI
+// Takes amount in argument into the accounts' balance as well as an amount of interest for putting it in the bank
 void Checking::deposit(float amount){
   balance += amount * (1 + add_interest());
   transactions.push_back(new Transaction);
@@ -9,7 +9,8 @@ void Checking::deposit(float amount){
   transactions[transactions.size()-1]->process_tran(customer->get_customer_id(), 0, amount, list_of_fees);
 }
 
-// TBI
+// Takes amount in argument out of the accounts' balance as well as a checkings charge
+// If user withdraws more than what is in the bank (resulting in a negative balance), an additional overdraft penalty is taken
 void Checking::withdraw(float amount){
   balance -= amount * (1 + add_charge());
   transactions.push_back(new Transaction);

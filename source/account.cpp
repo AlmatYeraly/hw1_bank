@@ -1,5 +1,6 @@
 #include "account.h"
 #include <typeinfo>
+#include <iostream>
 
 Account::Account(Customer* set_customer,int set_a_number, bool type) {
   a_type = type;
@@ -32,10 +33,11 @@ bool Account::get_type(){
   return a_type;
 }
 
+// Outputs the account's information (including customer and transactions) into a formatted string //
 std::string Account::to_string(){
   std::string info;
   int age = customer->get_age();
-  info = "\n Name: " + customer->get_name() + "\n";
+  info = "\nName: " + customer->get_name() + "\n";
 
   if (age >=16 && age < 23){
     info += "Customer group: Student \n";
@@ -48,7 +50,7 @@ std::string Account::to_string(){
   }
 
   info += 
-    "Address: " + customer->get_address() + "\n"
+      "Address: " + customer->get_address() + "\n"
     + "Age: " + std::to_string(customer->get_age()) + "\n"
     + "Phone number: " + std::to_string(customer->get_telephone()) + "\n"
     + "Customer ID: " + std::to_string(customer->get_customer_id()) + "\n"
@@ -72,6 +74,5 @@ std::string Account::to_string(){
       + " " + std::to_string(transactions[i]->get_amount())
       + " " + transactions[i]->get_fees() + "\n";
   }
-
   return info;
 }

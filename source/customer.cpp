@@ -21,8 +21,8 @@ void Customer::set_age(int new_age){
 }
 
 // According to E.164, the maximum allowed plan phone number length is 15 digits
-void Customer::set_telephone(long const int new_phone){
-  if (new_phone <= 999999999999999){
+void Customer::set_telephone(long int new_phone){
+  if (new_phone <= 999999999999999 && new_phone >= 100){
     telephone_number = new_phone;
   }
 }

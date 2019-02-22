@@ -2,11 +2,10 @@
 #include <time.h>
 #include <stdlib.h>
 #include <typeinfo>
-//Must implement the usage of exceptions for control //
 
 // Requests user to input account number and customer number to find an account //
 // If account that matches the two numbers is found, outputs the pointer to the account //
-// If no account was found that matches the two numbers, outputs NULL
+// If no account was found that matches the two numbers, outputs a NULL pointer //
 Account* Bank::get_account(){
   char response;
   while(true){
@@ -30,7 +29,7 @@ Account* Bank::get_account(){
       return NULL;
     }
     else if (found){
-      std::cout << "\n Account was found\n";
+      std::cout << "\nAccount was found\n";
       return accounts[index];
     }
   }
@@ -53,7 +52,7 @@ void Bank::add_account(){
     for (int i = 0; i < a_type.length(); i++){
       a_type[i] = std::tolower(a_type[i],loc);
     }
-    if (a_type == "savings"||a_type == "checking"){break;}
+    if (a_type == "savings" || a_type == "checking"){break;}
     else continue;
   }
   // Make unique account_id by generating random number within range and checking all other account's numbers
@@ -70,6 +69,7 @@ void Bank::add_account(){
       else continue;
     }
   }
+
   while (loop){
     std::cout<<"Will this account have an already existing customer? (y/n)\n";
     std::cin>>response;
@@ -80,23 +80,40 @@ void Bank::add_account(){
       std::cout << "Input name: ";
       std::cin.ignore();
       std::getline (std::cin, input_name);
-      
+
       std::string input_address;
       std::cout << "Input address: ";
       std::getline (std::cin, input_address);
 
       int input_age = -1;
-      while ((input_age < 0 || input_age > 125) || typeid(input_age) != typeid(int)){
-        std::cout << "Input age: ";
+      bool valid_int = false;
+      while ((input_age < 0 || input_age > 125) || !valid_int){
+        std::cout << "Input age: ";        
         std::cin >> input_age;
+        if (std::cin.fail()){
+          std::cin.clear();
+          valid_int = false;
+        }
+        else {
+          valid_int = true;
+        }
       }
 
       long int input_phone = 0;
-      while ((input_phone > 999999999999999 || input_phone < 100) || typeid(input_phone) != typeid(long int)){
-        std::cout <<"Input telephone number: ";
-        std::cin >> input_phone;
+      valid_int = false;
+      while ((input_phone > 999999999999999 || input_phone < 100) || !valid_int){
+        std::cout << "Input telephone number: ";
         std::cin.ignore();
+        std::cin >> input_phone;
+        if (std::cin.fail()){
+          std::cin.clear();
+          valid_int = false;
+        }
+        else {
+          valid_int = true;
+        }
       }
+
       // Make unique customer_id by generating random number within range and checking all other account's customer
       unique = false;
       int new_c_id;
@@ -110,64 +127,48 @@ void Bank::add_account(){
           else continue;
         }
       }
+      // With the information we need given, creates savings and checkings with a specified customer based on age given //
       if (input_age >= 16 && input_age < 23){
         if (a_type == "savings"){
           accounts.push_back(new Savings(new  Student(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 1));
-          std::cout<<"\n Student Savings Account\n";
-          std::cout<<"Account id: " << 
-          accounts[accounts.size()-1]->get_account_number() <<std::endl;
-          std::cout<<"Customer id: " << 
-          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+          std::cout<<"\nStudent Savings Account\n";
         }
         else if (a_type == "checking"){
           accounts.push_back(new Checking(new Student(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 0));
-          std::cout<<"\n Student Checking Account\n";
-          std::cout<<"Account id: " << 
-          accounts[accounts.size()-1]->get_account_number() <<std::endl;
-          std::cout<<"Customer id: " << 
-          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+          std::cout<<"\nStudent Checking Account\n";
         }
-        break;
+        loop = false;
       }
       else if (input_age >= 23 && input_age < 65){
         if (a_type == "savings"){
           accounts.push_back(new Savings(new  Adult(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 1));
-          std::cout<<"\n Adult Savings Account\n";
-          std::cout<<"Account id: " << 
-          accounts[accounts.size()-1]->get_account_number() <<std::endl;
-          std::cout<<"Customer id: " << 
-          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+          std::cout<<"\nAdult Savings Account\n";
         }
         else if (a_type == "checking"){
           accounts.push_back(new Checking(new Adult(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 0));
-          std::cout<<"\n Adult Checking Account\n";
-          std::cout<<"Account id: " << 
-          accounts[accounts.size()-1]->get_account_number() <<std::endl;
-          std::cout<<"Customer id: " << 
-          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+          std::cout<<"\nAdult Checking Account\n";
         }
-        break;
+        loop = false;
       }
       else if (input_age >= 65){
         if (a_type == "savings"){
           accounts.push_back(new Savings(new  Senior(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 1));
-          std::cout<<"\n Senior Savings Account\n";
-          std::cout<<"Account id: " << 
-          accounts[accounts.size()-1]->get_account_number() <<std::endl;
-          std::cout<<"Customer id: " << 
-          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+          std::cout<<"\nSenior Savings Account\n";
         }
         else if (a_type == "checking"){
           accounts.push_back(new Checking(new Senior(input_name, input_address,input_age, input_phone, new_c_id),new_a_id, 0));
-          std::cout<<"\n Senior Checking Account\n";
-          std::cout<<"Account id: " << 
-          accounts[accounts.size()-1]->get_account_number() <<std::endl;
-          std::cout<<"Customer id: " << 
-          accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
+          std::cout<<"\nSenior Checking Account\n";
         }
-        break;
+        loop = false;
       }
+      std::cout<<"Account id: " << 
+      accounts[accounts.size()-1]->get_account_number() <<std::endl;
+      std::cout<<"Customer id: " << 
+      accounts[accounts.size()-1]->get_customer()->get_customer_id() <<std::endl;
     }
+
+    // If the user is creating an account with an already existing customer, prompts for the customer's number and searches within the other accounts for a match and uses the pointer to access the customer
+    // When the account is made, it displays the account and customer id
     else if (response == 'y'){
       bool found= false;
       int find_id;
